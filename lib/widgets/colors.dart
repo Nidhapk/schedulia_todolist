@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+
+Color lightYellow = Colors.yellow.shade100;
+Color lightBlue = Colors.lightBlue.shade100;
+Color ligtRed = Colors.red.shade100;
+Color lightGreen = Colors.green.shade100;
+Color appBarColor = const Color.fromARGB(255, 59, 56, 63);
+Color white = Colors.white;
+Color darkpurple = const Color.fromARGB(255, 105, 66, 118);
+Color lightPurple = const Color.fromARGB(255, 193, 168, 197);
+Color gradientPink = const Color.fromARGB(255, 249, 235, 252);
+Color lightpik = const Color.fromARGB(255, 193, 163, 193);
+Color lightPurpleTextField = const Color.fromARGB(255, 213, 204, 219);
+Color grey = const Color.fromARGB(255, 130, 129, 134);
+Color indigo = Colors.indigo;
+Color viewContainerColorOne = const Color.fromARGB(255, 237, 224, 240);
+Color viewContainerColorTwo = const Color.fromARGB(255, 246, 235, 248);
+Color textformColor = const Color.fromARGB(255, 213, 204, 219);
+Color progressBackgroundColor = const Color.fromARGB(255, 165, 94, 94);
+Color progressColor = const Color.fromARGB(255, 87, 64, 127);
+Color gradientColor1 = const Color.fromARGB(255, 220, 205, 250);
+Color gradientColor2 = const Color.fromARGB(255, 248, 246, 250);
+Color lightGrey = const Color.fromARGB(255, 230, 229, 229);
+Color passowrdlightgrey = const Color.fromARGB(255, 225, 222, 227);
+Color screenGradient = const Color.fromARGB(255, 195, 199, 226);
+Color screenGradient2 = const Color.fromARGB(255, 250, 250, 252);
