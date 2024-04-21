@@ -15,15 +15,12 @@ class _TaskTabBarState extends State<TaskTabBar>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
-    // TODO: implement initState
-
     controller = TabController(length: 3, vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     controller.dispose();
     super.dispose();
   }
@@ -36,10 +33,10 @@ class _TaskTabBarState extends State<TaskTabBar>
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: Column(children: [
-              SizedBox(
+             const  SizedBox(
                 height: 40,
               ),
               Text(
@@ -49,17 +46,17 @@ class _TaskTabBarState extends State<TaskTabBar>
               Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 151, 145, 153),
+                    color:const  Color.fromARGB(255, 151, 145, 153),
                     borderRadius: BorderRadius.circular(8)),
                 child: TabBar(
                   dividerHeight: 0,
                   indicatorColor: darkpurple,
-                  indicatorPadding: EdgeInsets.all(5),
+                  indicatorPadding: const EdgeInsets.all(5),
                   indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(8), color: white),
                   controller: controller,
                   indicatorSize: TabBarIndicatorSize.tab,
-                  tabs: [
+                  tabs:const  [
                     Tab(
                       text: 'Done',
                     ),
@@ -72,15 +69,10 @@ class _TaskTabBarState extends State<TaskTabBar>
                   ],
                 ),
               ),
-
-              // SizedBox(
-              //   height: 20,
-              // )
-
               Expanded(
                 child: TabBarView(
                   controller: controller,
-                  children: [TaskDone(), TaskNotDone(), TaskImportant()],
+                  children: const [TaskDone(), TaskNotDone(), TaskImportant()],
                 ),
               )
             ]),

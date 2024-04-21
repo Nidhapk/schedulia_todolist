@@ -30,8 +30,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 backgroundColor: appBarColor,
                 showSelectedLabels: true,
                 showUnselectedLabels: false,
-                selectedItemColor: Color.fromARGB(255, 88, 54, 106),
-                unselectedItemColor: Color.fromARGB(95, 29, 9, 29),
+                selectedItemColor:const  Color.fromARGB(255, 88, 54, 106),
+                unselectedItemColor:const  Color.fromARGB(95, 29, 9, 29),
                 currentIndex: selectedValueNotifier.value,
                 onTap: (selectedIndex) {
                   selectedValueNotifier.value = selectedIndex;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomAlertBox extends StatelessWidget {
   final String text;
+  final String okText;
   final String title;
   final VoidCallback onpressedCancel;
   final VoidCallback onpressedDelete;
@@ -10,13 +11,13 @@ class CustomAlertBox extends StatelessWidget {
       required this.text,
       required this.title,
       required this.onpressedCancel,
-      required this.onpressedDelete});
+      required this.onpressedDelete,required this.okText});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
         backgroundColor: const Color.fromRGBO(247, 246, 246, 1),
-        //shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+        
         title: Text(title),
         titleTextStyle: const TextStyle(
             fontWeight: FontWeight.w500, color: Colors.black, fontSize: 20),
@@ -26,12 +27,12 @@ class CustomAlertBox extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: onpressedCancel,
-            child: const Text(
+            child:const Text(
               'Cancel',
-              style: TextStyle(color: Color.fromARGB(255, 206, 21, 79)),
+              style:  TextStyle(color: Color.fromARGB(255, 206, 21, 79)),
             ),
           ),
-          TextButton(onPressed: onpressedDelete, child: const Text('Delete'))
+          TextButton(onPressed: onpressedDelete, child:  Text(okText))
         ]);
   }
 }

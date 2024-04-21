@@ -159,14 +159,14 @@ class _MyWidgetState extends State<AddEvents> {
                       ),
                       MyCustomTextFormField(
                           mode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            final trimmedValue = value?.trim();
-                            if (trimmedValue == null || trimmedValue.isEmpty) {
-                              return 'description can\'t be empty';
-                            } else {
-                              return null;
-                            }
-                          },
+                          // validator: (value) {
+                          //   final trimmedValue = value?.trim();
+                          //   if (trimmedValue == null || trimmedValue.isEmpty) {
+                          //     return 'description can\'t be empty';
+                          //   } else {
+                          //     return null;
+                          //   }
+                          // },
                           hintText: 'description',
                           customController: eventdescriptionController),
                       const SizedBox(

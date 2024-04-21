@@ -22,11 +22,11 @@ class CustomBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ViewprofileRow(
-              icon: Icons.list_alt_sharp,
-              text: 'Add Task',
-              onTap: () {
-                Navigator.of(context).pushNamed('/addTask');
-              }),
+            onTap: (){Navigator.of(context).pushNamed('/addTask');},
+             icon: Icons.list_alt_sharp,
+             text: 'Add Task',
+             
+             ),
           Divider(
             thickness: 1,
             color: grey,
@@ -36,7 +36,8 @@ class CustomBottomSheet extends StatelessWidget {
               text: 'Add Event',
               onTap: () {
                 Navigator.of(context).pushNamed('/addEvent');
-              }),
+              }
+              ),
         ],
       ),
     );

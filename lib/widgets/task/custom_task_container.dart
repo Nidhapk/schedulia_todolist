@@ -9,6 +9,7 @@ class CustomTaskContainer extends StatelessWidget {
   final Widget? widget;
   final BoxBorder? border;
   final TextDecoration? decoration;
+  final TextDecoration? subtitleDecoration;
   const CustomTaskContainer(
       {super.key,
       required this.text,
@@ -18,7 +19,8 @@ class CustomTaskContainer extends StatelessWidget {
       required this.endTime,
       this.decoration,
       this.border,
-      this.widget});
+      this.widget,
+      this.subtitleDecoration});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class CustomTaskContainer extends StatelessWidget {
       child: Container(
           height: 70,
           decoration: BoxDecoration(
-            border: border,
+              border: border,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -42,15 +44,12 @@ class CustomTaskContainer extends StatelessWidget {
                   bottomRight: Radius.circular(20)),
               gradient: LinearGradient(
                 colors: colors,
-
-                // Color.fromARGB(255, 252, 219, 205),
-                // Color.fromARGB(255, 232, 203, 249),
               )),
           child: ListTile(
             onTap: onTap,
             title: Text(
               text,
-              style:  TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                   decoration: decoration),
@@ -59,7 +58,7 @@ class CustomTaskContainer extends StatelessWidget {
             trailing: widget,
             subtitle: Text(
               '$startTime to $endTime',
-              style: const TextStyle(fontSize: 12),
+              style:  TextStyle(fontSize: 12,decoration: subtitleDecoration),
             ),
           )),
     );

@@ -21,13 +21,13 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       userName: fields[1] as String?,
       userimage: fields[2] as String?,
       password: fields[3] as String?,
-    );
+    )..isBlocked = fields[4] as bool?;
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +35,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(2)
       ..write(obj.userimage)
       ..writeByte(3)
-      ..write(obj.password);
+      ..write(obj.password)
+      ..writeByte(4)
+      ..write(obj.isBlocked);
   }
 
   @override

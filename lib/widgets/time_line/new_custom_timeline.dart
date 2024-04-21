@@ -23,6 +23,7 @@ class NewCustomTimeLine extends StatelessWidget {
   BoxBorder? border;
   Widget? widget;
   TextDecoration? decoration;
+  TextDecoration subtitleDecoration;
   final Function(BuildContext) onPressed1;
   final Function(BuildContext) onPressed2;
 
@@ -38,14 +39,15 @@ class NewCustomTimeLine extends StatelessWidget {
       this.border,
       this.taskModel,
       this.widget,
-      this.onItem2,this.onItem1,
+      this.onItem2,
+      this.onItem1,
       required this.onTap,
       required this.onPressed1,
       required this.onPressed2,
       required this.lineColor,
       required this.indicatorColor,
-      required this.textColor
-      });
+      required this.textColor,
+      required this.subtitleDecoration});
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +74,27 @@ class NewCustomTimeLine extends StatelessWidget {
         lineXY: 0.23,
         beforeLineStyle: LineStyle(color: lineColor, thickness: 3),
         indicatorStyle: IndicatorStyle(
+          width: 20,
           indicatorXY: 0.9,
           color: indicatorColor,
         ),
         endChild: Padding(
             padding: const EdgeInsets.only(left: 10, right: 17, bottom: 15),
             child: CustomTaskContainer(
-                border: border,decoration: decoration,
+                subtitleDecoration: subtitleDecoration,
+                border: border,
+                decoration: decoration,
                 text: title,
                 widget: PopupMenuButton(
-                    
                     itemBuilder: (BuildContext context) {
                       return [
                         PopupMenuItem(
-                         onTap: onItem1, child: item1,
+                          onTap: onItem1,
+                          child: item1,
                         ),
                         PopupMenuItem(
-                          onTap: onItem2,child: item2,
+                          onTap: onItem2,
+                          child: item2,
                         )
                       ];
                     },
@@ -110,6 +116,7 @@ class NewCustomTimeLine extends StatelessWidget {
               Text(
                 startTime,
                 style: TextStyle(
+                    decoration: subtitleDecoration,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: textColor),
@@ -120,9 +127,11 @@ class NewCustomTimeLine extends StatelessWidget {
               Text(
                 endTime,
                 style: TextStyle(
+                    decoration: subtitleDecoration,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: textColor),          )
+                    color: textColor),
+              )
             ],
           ),
         ),

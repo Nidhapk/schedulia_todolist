@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //AddNewTask(),
       //CalenderScreen(),
       const EventScreen(),
-      PerfomanceScreen(),
+      const PerfomanceScreen(),
     ];
 
     ValueNotifier<int> selectedValueNotifier = ValueNotifier<int>(0);

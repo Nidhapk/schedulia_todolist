@@ -16,7 +16,7 @@ class ImagePopUp extends StatelessWidget {
       onTap: () {
         condition == true
             ? showDialog(
-                context: context,
+                context: context, 
                 builder: (context) {
                   return AlertDialog(
                     content: SizedBox(

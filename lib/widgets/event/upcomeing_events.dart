@@ -25,7 +25,7 @@ class _MyWidgetState extends State<UpcomeingEvents> {
   @override
   void initState() {
     super.initState();
-    initializeEvents();
+   initializeEvents();
   }
 
   DateTime? rangeStart;
@@ -33,6 +33,8 @@ class _MyWidgetState extends State<UpcomeingEvents> {
   DateTime today = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    //initializeEvents(); 
+
     return Column(
       children: [
         CategoryTablecalender(
@@ -81,6 +83,7 @@ class _MyWidgetState extends State<UpcomeingEvents> {
                 return ListView.builder(
                   itemCount: value.length,
                   itemBuilder: (BuildContext context, int index) {
+                   
                     initializeEvents();
                     valueChecked1 = value[index].isImportant;
                     return Padding(
@@ -145,7 +148,7 @@ class _MyWidgetState extends State<UpcomeingEvents> {
                                     showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return CustomAlertBox(
+                                        return CustomAlertBox(okText: 'Delete',
                                             text:
                                                 'Are you sure you want to delete this event? ',
                                             title: 'Delete event?',
@@ -155,7 +158,10 @@ class _MyWidgetState extends State<UpcomeingEvents> {
                                             onpressedDelete: () async {
                                               await EventFunctions()
                                                   .deleteEvent(value[index].key)
-                                                  .then((value) => CustomSnackBar.show(context, 'Event has been successfully deleted'));
+                                                  .then((value) =>
+                                                      CustomSnackBar.show(
+                                                          context,
+                                                          'Event has been successfully deleted'));
                                               Navigator.of(context).pop();
                                             });
                                       },

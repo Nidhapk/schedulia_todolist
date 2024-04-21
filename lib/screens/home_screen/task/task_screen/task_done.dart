@@ -20,7 +20,7 @@ class TaskDone extends StatelessWidget {
         if (taskDoneList.isNotEmpty) {
           return ListView.builder(
             itemBuilder: (context, index) {
-              return CustomTaskContainer(colors: [Color.fromARGB(255, 252, 219, 205),
+              return CustomTaskContainer(colors: const [Color.fromARGB(255, 252, 219, 205),
                       Color.fromARGB(255, 232, 203, 249),],
                 text: taskDoneList[index].taskTitle!,
                 onTap: () {

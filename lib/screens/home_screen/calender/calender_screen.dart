@@ -82,6 +82,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   context: context,
                                   builder: (context) {
                                     return CustomAlertBox(
+                                        okText: 'Delete',
                                         text:
                                             'Are you sure you want to delete this task?',
                                         title: 'Delete Task?',
@@ -90,9 +91,12 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                         },
                                         onpressedDelete: () async {
                                           await TaskFunctions()
-                                              .delete(taskList[index].key!);
+                                              .delete(taskList[index].key!)
+                                              .then((value) =>
+                                                  Navigator.of(context).pop());
                                         });
                                   },
+                                  
                                 );
                               }),
                           SlidableAction(

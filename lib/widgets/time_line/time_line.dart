@@ -81,6 +81,8 @@ class _TimeLineState extends State<TimeLine> {
                   : null,
               decoration: valueChecked1 == true
                   ? TextDecoration.lineThrough
+                  : TextDecoration.none,subtitleDecoration: valueChecked1 == true
+                  ? TextDecoration.lineThrough
                   : TextDecoration.none,
               text: widget.tasktile,
               startTime: widget.startTime,
@@ -103,7 +105,7 @@ class _TimeLineState extends State<TimeLine> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               const Text('Mark as Done'),
-                            const   SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
                               Icon(
@@ -131,7 +133,7 @@ class _TimeLineState extends State<TimeLine> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 const Text('Mark as Important'),
-                             const  SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Icon(
@@ -153,6 +155,9 @@ class _TimeLineState extends State<TimeLine> {
             children: [
               Text(widget.startTime,
                   style: TextStyle(
+                      decoration: valueChecked1 == true
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: valueChecked2 == true
@@ -164,6 +169,9 @@ class _TimeLineState extends State<TimeLine> {
               Text(
                 widget.endTime,
                 style: TextStyle(
+                    decoration: valueChecked1 == true
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: valueChecked2 == true

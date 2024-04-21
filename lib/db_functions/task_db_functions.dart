@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:schedulia/db_functions/category_db.dart';
 import 'package:schedulia/db_functions/db_functions.dart';
 import 'package:schedulia/model/task/task_model.dart';

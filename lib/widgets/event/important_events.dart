@@ -17,8 +17,6 @@ class _MyWidgetState extends State<ImportantEvents> {
   @override
   void initState() {
     super.initState();
-    // TODO: implement initState
-
     loadImportantEvents();
   }
 

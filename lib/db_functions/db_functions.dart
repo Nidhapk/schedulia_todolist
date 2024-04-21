@@ -92,7 +92,9 @@ class UserFunctions extends ChangeNotifier {
     } else {
       UserModel? matchUser = user.values.firstWhere(
         (element) =>
-            element.userName == userName && element.password == password,
+            element.userName == userName &&
+            element.password == password &&
+            element.isBlocked == false,
         orElse: () => UserModel(),
       );
       userKey = null;
@@ -140,5 +142,11 @@ class UserFunctions extends ChangeNotifier {
     await users.delete(key);
 
     await getUser();
+  }
+
+  Future blockeUser(int key) async {
+    final Box<UserModel> users = await Hive.openBox<UserModel>('user_db');
+    UserModel userModel = UserModel(isBlocked: true);
+    await users.put(key, userModel);
   }
 }

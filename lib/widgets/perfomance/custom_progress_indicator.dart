@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:schedulia/widgets/colors.dart';
 
 class GradientCircularPercentIndicator extends StatelessWidget {
   final double radius;
@@ -19,8 +20,8 @@ class GradientCircularPercentIndicator extends StatelessWidget {
         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
       ),
       circularStrokeCap: CircularStrokeCap.round,
-      backgroundColor: const Color.fromARGB(255, 203, 137, 137),
-      progressColor: const Color.fromARGB(255, 99, 80, 147),
+      backgroundColor: const Color.fromARGB(255, 205, 193, 218),
+      progressColor: darkpurple,
     );
   }
 }

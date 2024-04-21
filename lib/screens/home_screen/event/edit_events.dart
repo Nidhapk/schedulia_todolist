@@ -39,7 +39,8 @@ class _MyWidgetState extends State<EditEvents> {
     eventTitleController.text = widget.index.eventTitle ?? '';
     eventdescriptionController.text = widget.index.eventDescription ?? '';
     eventLocationController.text = widget.index.eventlocation ?? '';
-    selectedDate = DateFormat('dd-MMM-yyy').parse(widget.index.eventDate ?? '');
+    selectedDate =
+        DateFormat('dd-MMM-yyy').parse(widget.index.eventDate ?? '');
     imagepath = File(widget.index.eventImage ?? '');
     selectedTime = TimeOfDay.fromDateTime(
         DateFormat('hh:mm a').parse(widget.index.eventTime!));
@@ -62,156 +63,126 @@ class _MyWidgetState extends State<EditEvents> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  height: 540,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        const Color.fromARGB(255, 233, 233, 239),
-                        white
-                      ], begin: Alignment.topCenter, end: Alignment.bottomLeft),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.9),
-                          blurRadius: 4,
-                          spreadRadius: 1,
-                          offset: const Offset(0, 3),
-                        )
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        pickImageFromGallery();
+                      },
+                      child: Stack(children: [
+                        widget.index.eventImage == null ||
+                                widget.index.eventImage == ''
+                            ? SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Image.asset(
+                                    'lib/assets/gallery/gallery.jpg'),
+                              )
+                            : SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Image.file(
+                                  imagepath!,
+                                  fit: BoxFit.cover,
+                                )),
+                        Positioned(
+                            top: 60,
+                            child: Icon(
+                              Icons.add,
+                              color: white,
+                              size: 30,
+                            ))
                       ]),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            pickImageFromGallery();
-                          },
-                          child: Stack(children: [
-                            imagepath != null && imagepath == File('')
-                                ? SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: Image.file(
-                                      imagepath!,
-                                      fit: BoxFit.cover,
-                                    ))
-                                : SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: Image.asset(
-                                        'lib/assets/gallery/gallery.jpg'),
-                                  ),
-                            // : Image.asset(
-                            //     'lib/assets/gallery/schedulia_logo.png',
-                            //     fit: BoxFit.cover,
-                            //   ),
-
-                            if (imagepath == null)
-                              Positioned(
-                                  top: 60,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: white,
-                                    size: 30,
-                                  ))
-                          ]),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      datePicker();
-                                    },
-                                    icon: Icon(
-                                      Icons.calendar_month_outlined,
-                                      color: grey,
-                                    )),
-                                Text(DateFormat('dd-MMM-yyy')
-                                    .format(selectedDate!)),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      timePicker();
-                                    },
-                                    icon: Icon(
-                                      Icons.timer,
-                                      color: grey,
-                                    )),
-                                Text(selectedTime!.format(context)),
-                              ],
-                            ),
+                            IconButton(
+                                onPressed: () {
+                                  datePicker();
+                                },
+                                icon: Icon(
+                                  Icons.calendar_month_outlined,
+                                  color: grey,
+                                )),
+                            Text(DateFormat('dd-MMM-yyy')
+                                .format(selectedDate!)),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        MyCustomTextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'title can\'t be empty';
-                              } else {
-                                return null;
-                              }
-                            },
-                            hintText: 'title',
-                            customController: eventTitleController),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        MyCustomTextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'description can\'t be empty';
-                              } else {
-                                return null;
-                              }
-                            },
-                            hintText: 'description',
-                            customController: eventdescriptionController),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        MyCustomTextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'location can\'t be empty';
-                              } else {
-                                return null;
-                              }
-                            },
-                            hintText: 'location',
-                            customController: eventLocationController),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            EventButton(
-                                width: 300,
-                                text: 'Edit',
-                                onPressed: () async {
-                                  await editButtonOnClicked(widget.keyy);
-                                  Navigator.of(context).pop();
-                                }),
+                            IconButton(
+                                onPressed: () {
+                                  timePicker();
+                                },
+                                icon: Icon(
+                                  Icons.timer,
+                                  color: grey,
+                                )),
+                            Text(selectedTime!.format(context)),
                           ],
                         ),
                       ],
                     ),
-                  ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    MyCustomTextFormField(
+                        mode: AutovalidateMode.always,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'title can\'t be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        hintText: 'title',
+                        customController: eventTitleController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MyCustomTextFormField(
+                        hintText: 'description',
+                        customController: eventdescriptionController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MyCustomTextFormField(
+                        mode: AutovalidateMode.always,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'location can\'t be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        hintText: 'location',
+                        customController: eventLocationController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        EventButton(
+                            width: 300,
+                            text: 'Edit',
+                            onPressed: () async {
+                              await editButtonOnClicked(widget.keyy);
+                              Navigator.of(context).pop();
+                            }),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],

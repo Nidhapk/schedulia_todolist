@@ -113,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       final checkVariable = await UserFunctions()
                           .validateUserLogin(userNameController.text.trim(),
                               passwordController.text.trim());
+                              
                       if (checkVariable != null) {
                         await UserFunctions().getCurrentUserKey();
 

@@ -13,7 +13,7 @@ class EventViewRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: MyTextStyle.eventHeadingStyle),
+          Text(title, style: MyTextStyle.eventHeadingStyle,),
           Text(
             body,
             style: MyTextStyle.eventBodystyle,

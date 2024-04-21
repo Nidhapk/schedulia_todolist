@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:schedulia/db_functions/db_functions.dart';
@@ -52,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
     await UserFunctions().getUser();
     if (checkUser == false) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ScreenOne()));
+          .push(MaterialPageRoute(builder: (context) =>const  ScreenOne()));
     }
   else  if (isLoggedIn == true) {
       {

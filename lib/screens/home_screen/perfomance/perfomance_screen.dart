@@ -7,6 +7,7 @@ import 'package:schedulia/model/task/task_model.dart';
 import 'package:schedulia/model/user/user_model.dart';
 import 'package:schedulia/screens/home_screen/task/task_screen/task_done.dart';
 import 'package:schedulia/screens/home_screen/task/task_screen/task_not_done.dart';
+import 'package:schedulia/widgets/alert_box/alert_box.dart';
 import 'package:schedulia/widgets/category/user_container.dart';
 import 'package:schedulia/widgets/colors.dart';
 import 'package:schedulia/widgets/perfomance/custom_progress_indicator.dart';
@@ -14,9 +15,22 @@ import 'package:schedulia/widgets/perfomance/perfomance_circle.dart';
 import 'package:schedulia/widgets/popup/custom_popup.dart';
 
 // ignore: must_be_immutable
-class PerfomanceScreen extends StatelessWidget {
-  PerfomanceScreen({super.key});
+class PerfomanceScreen extends StatefulWidget {
+  const PerfomanceScreen({super.key});
+
+  @override
+  State<PerfomanceScreen> createState() => _PerfomanceScreenState();
+}
+
+class _PerfomanceScreenState extends State<PerfomanceScreen> {
   ValueNotifier<int?> perfomanceNotifier = ValueNotifier(0);
+  @override
+  void initState() {
+    super.initState();
+    initialize();
+
+    //TaskFunctions().getTaskDone();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +85,27 @@ class PerfomanceScreen extends StatelessWidget {
                             title: 'Logout',
                             icon: Icons.logout_rounded,
                             onTap: () async {
-                              await UserFunctions()
-                                  .checkUserLoggedIn(false, userKey!)
-                                  .then((value) =>
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          '/loginPage', (route) => false));
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return CustomAlertBox(
+                                      okText: 'Logout',
+                                      text: 'Are you sure you want to logout?',
+                                      title: 'Logout',
+                                      onpressedCancel: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      onpressedDelete: () async {
+                                        await UserFunctions()
+                                            .checkUserLoggedIn(false, userKey!)
+                                            .then((value) => Navigator
+                                                .pushNamedAndRemoveUntil(
+                                                    context,
+                                                    '/loginPage',
+                                                    (route) => false));
+                                      });
+                                },
+                              );
                             })
                       ],
                     ),
@@ -90,6 +120,8 @@ class PerfomanceScreen extends StatelessWidget {
                 valueListenable: taskDoneNotifier,
                 builder: (context, List<TaskModel> taskDoneList, child_) {
                   return PerfomanceCircle(
+                    color: darkpurple,
+                    icon: Icons.circle_outlined,
                     text1: taskDoneList.length.toString(),
                     image:
                         'lib/assets/perfomance/circle-outline-of-small-size-purple.png',
@@ -101,9 +133,11 @@ class PerfomanceScreen extends StatelessWidget {
                 valueListenable: taskNotDoneNotifier,
                 builder: (context, List<TaskModel> taskNotDone, child) {
                   return PerfomanceCircle(
+                    color: const Color.fromARGB(255, 205, 193, 218),
+                    icon: Icons.circle_outlined,
                     text1: taskNotDone.length.toString(),
-                    image:
-                        'lib/assets/perfomance/circle-outline-of-small-size-red.png',
+                    // image:
+                    //     'lib/assets/perfomance/circle-outline-of-small-size-red.png',
                     text2: 'Not Completed',
                   );
                 },
@@ -142,7 +176,11 @@ class PerfomanceScreen extends StatelessWidget {
               style: MyTextStyle.userFeedbackStyle,
             )
           else if (userPerfomance == 0)
-            const Text('')
+            const Text(
+              'You haven\'t started yet, Let\'s get started!',
+              textAlign: TextAlign.center,
+              style: MyTextStyle.userFeedbackStyle,
+            )
           else
             const Text(
               'It looks like there\'s room for improvement.\n Stay Focused!',
@@ -168,5 +206,11 @@ class PerfomanceScreen extends StatelessWidget {
       perfomanceOfUser = 0;
     }
     return perfomanceOfUser;
+  }
+
+  initialize() async {
+    await TaskFunctions().getCurrentUserTask(userKey!);
+    await TaskFunctions().getTaskNotDone();
+    return await TaskFunctions().getTaskDone();
   }
 }

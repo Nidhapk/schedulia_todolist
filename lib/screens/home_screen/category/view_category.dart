@@ -106,9 +106,11 @@ class _ViewcategoryState extends State<Viewcategory> {
                         valueChecked1 = valueList[index].iscompleted;
                         valueChecked2 = valueList[index].isImportant;
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              top: 15.0, left: 10, right: 15),
+                          padding: const EdgeInsets.only(left: 10, right: 15),
                           child: NewCustomTimeLine(
+                              subtitleDecoration: valueChecked1 == true
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none,
                               border: valueChecked2 == true
                                   ? Border.all(
                                       width: 1,
@@ -138,6 +140,7 @@ class _ViewcategoryState extends State<Viewcategory> {
                                   context: context,
                                   builder: (context) {
                                     return CustomAlertBox(
+                                        okText: 'delete',
                                         title: 'Delete Task?',
                                         text:
                                             'Are you sure you want to delete this task?',

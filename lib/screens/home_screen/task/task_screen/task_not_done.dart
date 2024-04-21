@@ -22,7 +22,7 @@ class TaskNotDone extends StatelessWidget {
               itemCount: taskNotDonelist.length,
               itemBuilder: (context, index) {
                 return CustomTaskContainer(
-                  colors: [Color.fromARGB(255, 252, 219, 205),
+                  colors:const  [Color.fromARGB(255, 252, 219, 205),
                       Color.fromARGB(255, 232, 203, 249),],
                   text: taskNotDonelist[index].taskTitle!,
                   onTap: () {

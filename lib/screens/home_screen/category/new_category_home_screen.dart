@@ -123,7 +123,7 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return CustomAlertBox(
+                    return CustomAlertBox(okText: 'Delete',
                         title: 'Delete category?',
                         text: 'Are you sure you want to delete this category?',
                         onpressedCancel: () {

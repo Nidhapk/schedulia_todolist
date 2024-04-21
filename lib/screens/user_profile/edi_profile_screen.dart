@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:schedulia/db_functions/db_functions.dart';
 import 'package:schedulia/model/user/user_model.dart';
 import 'package:schedulia/widgets/colors.dart';
-import 'package:schedulia/widgets/custom_button.dart';
+import 'package:schedulia/widgets/custom_snackbar.dart';
 import 'package:schedulia/widgets/perfomance/image_container.dart';
 import 'package:schedulia/widgets/textfield/custom_task_textformfield.dart';
 import 'package:schedulia/widgets/gradient_container.dart';
@@ -60,7 +60,7 @@ class _EditProfileState extends State<EditProfile> {
                       Stack(
                         children: [
                           ImageContainer(
-                              condition: image != null,
+                              condition: image != null && image!.isNotEmpty,
                               imageProvider: FileImage(File(image!))),
                           ProfileIconButton(onTap: () {
                             pickImageFromGallery();
@@ -75,12 +75,15 @@ class _EditProfileState extends State<EditProfile> {
                         child: Column(
                           children: [
                             MyCustomTextFormField(
+                              mode: AutovalidateMode.onUserInteraction,
                               hintText: 'Enter your name',
                               maxLines: 1,
                               customController: nameController,
                               // width: 300,
                               validator: (value) {
-                                if (value == null || value.isEmpty) {
+                                final trimmedValue = value?.trim();
+                                if (trimmedValue == null ||
+                                    trimmedValue.isEmpty) {
                                   return 'Name can\'t be empty';
                                 } else {
                                   return null;
@@ -91,11 +94,14 @@ class _EditProfileState extends State<EditProfile> {
                               height: 20,
                             ),
                             MyCustomTextFormField(
+                              mode: AutovalidateMode.always,
                               hintText: 'Enter your Username', maxLines: 1,
                               customController: userNameController,
                               // width: 300,
                               validator: (value) {
-                                if (value == null || value.isEmpty) {
+                                final trimmedValue = value?.trim();
+                                if (trimmedValue == null ||
+                                    trimmedValue.isEmpty) {
                                   return 'Username can\'t be empty';
                                 } else {
                                   return null;
@@ -154,10 +160,12 @@ class _EditProfileState extends State<EditProfile> {
         name: nameController.text.trim(),
         userName: userNameController.text.trim(),
         userimage: image,
-        password: '',
+        password: widget.user?.password,
       );
 
-      await UserFunctions().editUser(userModel, int.parse(userKey!));
+      await UserFunctions().editUser(userModel, int.parse(userKey!)).then(
+          (value) => CustomSnackBar.show(
+              context, 'Profile has been successfully edited'));
     }
   }
 }

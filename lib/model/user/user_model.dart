@@ -16,5 +16,8 @@ class UserModel extends HiveObject {
   @HiveField(3)
   String? password;
 
-  UserModel({this.name, this.userName, this.userimage, this.password});
+  @HiveField(4)
+  bool? isBlocked;
+
+  UserModel({this.name, this.userName, this.userimage, this.password,this.isBlocked});
 }

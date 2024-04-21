@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:schedulia/db_functions/event_db_functions.dart';
@@ -96,8 +98,19 @@ class _SearchEventState extends State<SearchEvent> {
                                   builder: (context) => ViewEvents(
                                       index: _filteredEvents[index])));
                             },
+                            leading: _filteredEvents[index].eventImage != null
+                                ? SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: Image.file(File(
+                                        _filteredEvents[index].eventImage ??
+                                            '')))
+                                : null,
                             title: Text(_filteredEvents[index].eventTitle!),
-                            subtitle: const Text(''),
+                            subtitle:
+                                Text(_filteredEvents[index].eventDate ?? ''),
+                            trailing:
+                                Text(_filteredEvents[index].eventTime ?? ''),
                           ),
                         ));
                   }),

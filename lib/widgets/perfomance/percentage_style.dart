@@ -8,7 +8,7 @@ class Percentage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+      style:const  TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
     );
   }
 }

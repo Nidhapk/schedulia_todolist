@@ -21,8 +21,8 @@ class ViewEvents extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back_ios_new_rounded)),
         toolbarHeight: 50,
-        foregroundColor: white,
-        backgroundColor: appBarColor,
+        foregroundColor: appBarColor,
+        backgroundColor: white,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -44,27 +44,34 @@ class ViewEvents extends StatelessWidget {
                 const Divider(thickness: 1),
                 EventViewcolumn(title: 'location', body: index.eventlocation!),
                 const Divider(thickness: 1),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: EventViewcolumn(
-                      title: 'Description', body: index.eventDescription!),
+                index.eventDescription != null &&
+                        index.eventDescription!.isNotEmpty
+                    ? EventViewcolumn(
+                        title:
+                            index.eventDescription != null ? 'Description' : '',
+                        body: index.eventDescription ?? '',
+                      )
+                    : const SizedBox(),
+                const SizedBox(
+                  height: 10,
                 ),
-                if (index.eventImage != null && index.eventImage!.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PhotoView(
-                                imageProvider:
-                                    FileImage(File(index.eventImage!)))));
-                      },
-                      child: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: Image.file(File(index.eventImage!))),
-                    ),
-                  ),
+                index.eventImage == null || index.eventImage!.isEmpty
+                    ? const SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PhotoView(
+                                    imageProvider:
+                                        FileImage(File(index.eventImage!)))));
+                          },
+                          child: SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Image.file(File(index.eventImage!))),
+                        ),
+                      )
               ],
             ),
           ),

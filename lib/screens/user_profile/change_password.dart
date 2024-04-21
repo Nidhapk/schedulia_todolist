@@ -19,6 +19,9 @@ class _ChangePasswordState extends State<ChangePassword> {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmNewPasswordController = TextEditingController();
   final formkey = GlobalKey<FormState>();
+  bool obscureText1 = true;
+  bool obscureText2 = true;
+  bool obscureText3 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,15 @@ class _ChangePasswordState extends State<ChangePassword> {
             children: [
               const SizedBox(height: 50),
               PasswordField(
+                  onPressed: () {
+                    setState(() {
+                      obscureText1 = !obscureText1;
+                    });
+                  },
+                  obscureText: obscureText1,
+                  icon: obscureText1 == true
+                      ? Icons.visibility_off
+                      : Icons.visibility,
                   mode: AutovalidateMode.onUserInteraction,
                   controller: oldPasswordController,
                   validator: (value) {
@@ -45,6 +57,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                   },
                   hintText: 'old password'),
               PasswordField(
+                  obscureText: obscureText2,
+                  onPressed: () {
+                    setState(() {
+                      obscureText2 = !obscureText2;
+                    });
+                  },
+                  icon: obscureText2 ? Icons.visibility_off : Icons.visibility,
                   mode: AutovalidateMode.onUserInteraction,
                   controller: newPasswordController,
                   validator: (value) {
@@ -61,6 +80,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                   },
                   hintText: 'new password'),
               PasswordField(
+                  onPressed: () {
+                    setState(() {
+                      obscureText3 = !obscureText3;
+                    });
+                  },
+                  obscureText: obscureText3,
+                  icon: obscureText3?Icons.visibility_off : Icons.visibility,
                   mode: AutovalidateMode.onUserInteraction,
                   controller: confirmNewPasswordController,
                   validator: (value) {

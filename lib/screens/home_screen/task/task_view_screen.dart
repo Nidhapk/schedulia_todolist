@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:schedulia/db_functions/task_db_functions.dart';
 import 'package:schedulia/model/task/task_model.dart';
 import 'package:schedulia/widgets/colors.dart';
-import 'package:schedulia/widgets/view_task/view_task_text.dart';
+import 'package:schedulia/widgets/event/eventview_rows.dart';
 
 class ViewTask extends StatelessWidget {
   final TaskModel taskIndex;
@@ -46,37 +46,78 @@ class ViewTask extends StatelessWidget {
                     builder: (BuildContext context, List<TaskModel> taskList,
                         child_) {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
                         children: [
-                          Tasktext(
-                            taskTitle: 'Task Title    :',
-                            details: taskIndex.taskTitle!,
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          EventViewRow(
+                              title: 'Task title',
+                              body: taskIndex.taskTitle ?? ''),
+                          Divider(
+                            thickness: 1,
+                            color: lightGrey,
                           ),
                           taskIndex.taskType != null &&
                                   taskIndex.taskType!.isNotEmpty
-                              ? Tasktext(
-                                  taskTitle: 'Task Type    :',
-                                  details: taskIndex.taskType!,
+                              ? EventViewRow(
+                                  title: 'Task Type',
+                                  body: taskIndex.taskType ?? '')
+                              : const SizedBox(),
+                          taskIndex.taskType != null &&
+                                  taskIndex.taskType!.isNotEmpty
+                              ? Divider(
+                                  thickness: 1,
+                                  color: lightGrey,
                                 )
                               : const SizedBox(),
-                          Tasktext(
-                            taskTitle: 'Date              :',
-                            details: taskIndex.date!,
+                          EventViewRow(
+                              title: 'Date', body: taskIndex.date ?? ''),
+                          Divider(
+                            thickness: 1,
+                            color: lightGrey,
                           ),
-                          Tasktext(
-                            taskTitle: 'Start Time    :',
-                            details: taskIndex.startTime!,
+                          EventViewRow(
+                              title: 'Start Time',
+                              body: taskIndex.startTime ?? ''),
+                          Divider(
+                            thickness: 1,
+                            color: lightGrey,
                           ),
-                          Tasktext(
-                            taskTitle: 'End Time      :',
-                            details: taskIndex.endTime!,
+                          EventViewRow(
+                              title: 'End Time', body: taskIndex.endTime ?? ''),
+                          Divider(
+                            thickness: 1,
+                            color: lightGrey,
                           ),
                           taskIndex.taskNote != null &&
                                   taskIndex.taskNote!.isNotEmpty
-                              ? Tasktext(
-                                  taskTitle: 'Task Note     :',
-                                  details: taskIndex.taskNote!,
-                                )
+                              ? const EventViewRow(title: 'Task Note', body: '')
                               : const SizedBox(),
+                          taskIndex.taskNote != null &&
+                                  taskIndex.taskNote!.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 20, right: 20),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1, color: lightGrey),
+                                        gradient: LinearGradient(colors: [
+                                          viewContainerColorOne,
+                                          viewContainerColorTwo
+                                        ]),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Text(taskIndex.taskNote ?? ''),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox()
                         ],
                       );
                     },
