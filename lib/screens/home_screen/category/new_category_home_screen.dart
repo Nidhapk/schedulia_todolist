@@ -120,10 +120,12 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
             },
             child: CustomCategorycontainer(
               onTap: () {
+                print(element.categoryIcon);
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return CustomAlertBox(okText: 'Delete',
+                    return CustomAlertBox(
+                        okText: 'Delete',
                         title: 'Delete category?',
                         text: 'Are you sure you want to delete this category?',
                         onpressedCancel: () {
@@ -149,13 +151,48 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
               text2: '',
               text3: '',
               icon: element.categoryIcon != null
-                  ? IconData(
-                      int.tryParse(element.categoryIcon!.split('-').last) ??
-                          Icons.error.codePoint,
-                      fontFamily: element.categoryIcon!.split('-').first)
+                  ? _getIconData(element.categoryIcon!)
+                  // ? IconData(
+                  //     int.tryParse(element.categoryIcon!.split('-').last) ??
+                  //         Icons.error.codePoint,
+                  //     fontFamily: element.categoryIcon!.split('-').first)
                   : null,
             )),
       );
+    }
+  }
+
+  IconData _getIconData(String iconDataString) {
+    //print(iconDataString);
+    switch (iconDataString) {
+      case 'MaterialIcons-985232':
+        return Icons.person_2_rounded;
+      case 'MaterialIcons-983892':
+        return Icons.monitor_heart_rounded;
+      case 'MaterialIcons-61843':
+        return Icons.location_on_outlined;
+      case 'MaterialIcons-983751':
+        return Icons.work_rounded;
+      case 'MaterialIcons-58780':
+        return Icons.shopping_cart;
+      case 'MaterialIcons-58141':
+        return Icons.home_work;
+      case 'MaterialIcons-57632':
+        return Icons.cake;
+      case 'MaterialIcons-63364':
+        return Icons.food_bank_rounded;
+      case 'MaterialIcons-59445':
+        return Icons.campaign_sharp;
+      case 'MaterialIcons-63002':
+        return Icons.card_giftcard_rounded;
+      case 'MaterialIcons-62127':
+        return Icons.play_circle_fill_outlined;
+      case 'MaterialIcons-60757':
+        return Icons.time_to_leave_sharp;
+      case 'MaterialIcons-984157':
+        return Icons.punch_clock_sharp;
+      default:
+        return Icons.tab;
     }
   }
 
