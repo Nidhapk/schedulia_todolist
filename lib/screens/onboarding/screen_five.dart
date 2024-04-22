@@ -13,16 +13,16 @@ class ScreenFive extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 80,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
               const Text(
                 'Plan your days',
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
               const Text(
                 'Never forget an upcoming event again! \nUse our calendar feature to mark important\n dates and stay prepared.',
@@ -35,11 +35,12 @@ class ScreenFive extends StatelessWidget {
                   SvgPicture.asset('lib/assets/Events-pana.svg')
                 ],
               ),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 230.0),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.5),
                 child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(

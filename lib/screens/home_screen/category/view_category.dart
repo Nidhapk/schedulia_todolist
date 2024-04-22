@@ -180,10 +180,8 @@ class _ViewcategoryState extends State<Viewcategory> {
                                         ViewTask(taskIndex: valueList[index])));
                               },
                               onItem1: () async {
-                                valueChecked1 = !valueChecked1!;
+                                valueChecked1 = !valueChecked1;
                                 checknotifier.value = valueChecked1;
-                                print('onitem1');
-
                                 await taskDone(
                                     modelValue,
                                     keyValue,
@@ -216,9 +214,8 @@ class _ViewcategoryState extends State<Viewcategory> {
                                 },
                               ),
                               onItem2: () async {
-                                valueChecked2 = !valueChecked2!;
+                                valueChecked2 = !valueChecked2;
                                 checknotifier2.value = valueChecked2;
-                                print('onitem2');
                                 await taskDone(
                                     modelValue,
                                     keyValue,
@@ -226,7 +223,6 @@ class _ViewcategoryState extends State<Viewcategory> {
                                     valueChecked1,
                                     valueChecked2);
                                 await initializeTask();
-                                print('yes');
                               },
                               item2: ValueListenableBuilder(
                                 valueListenable: checknotifier2,

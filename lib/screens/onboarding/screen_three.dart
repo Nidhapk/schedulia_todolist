@@ -10,23 +10,21 @@ class ScreenThree extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 100.0,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.12,
             ),
             const Text(
               'Always know what\'s next',
               style: TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(
-              height: 40.0,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
             const Text(
               'Keep track on your tasks and,\nmake sure nothing slips away.',
               style: TextStyle(fontSize: 15.0, color: Colors.black87),
             ),
-            const SizedBox(
-              height: 50.0,
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.06),
             Container(
               // height: 300,
               // width: 100,
@@ -54,7 +52,9 @@ class ScreenThree extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 50, left: 230.0),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.05,
+                  left: MediaQuery.of(context).size.width * 0.5),
               child: TextButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(

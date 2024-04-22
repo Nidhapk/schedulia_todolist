@@ -43,7 +43,10 @@ class ViewEvents extends StatelessWidget {
                 EventViewRow(title: 'Time', body: index.eventTime!),
                 const Divider(thickness: 1),
                 EventViewcolumn(title: 'location', body: index.eventlocation!),
-                const Divider(thickness: 1),
+                index.eventDescription != null &&
+                        index.eventDescription!.isNotEmpty
+                    ? const Divider(thickness: 1)
+                    : const SizedBox(),
                 index.eventDescription != null &&
                         index.eventDescription!.isNotEmpty
                     ? EventViewcolumn(

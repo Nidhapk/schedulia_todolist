@@ -26,22 +26,33 @@ class ScreenOne extends StatelessWidget {
               )
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 40.0, top: 70.0),
-            child: Text(
+          Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.1,
+                // 40.0
+                top: MediaQuery.of(context).size.width * 0.15
+                //70.0
+                ),
+            child: const Text(
               'Get things\ndone with\nSCHEDULIA',
               style: TextStyle(fontSize: 45.0, height: 1.2),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 40.0, top: 10.0),
-            child: Text(
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.1,
+              top: MediaQuery.of(context).size.width * 0.05,
+            ),
+            child: const Text(
               'let\'s help you meet up your tasks. ',
               style: TextStyle(fontSize: 20.0),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.1,
+              top: MediaQuery.of(context).size.width * 0.05,
+            ),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(

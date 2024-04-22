@@ -29,14 +29,14 @@ class _ScreenFourState extends State<ScreenFour> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 87),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
               SvgPicture.asset(
                 'lib/assets/New message-cuate.svg',
                 width: 320,
                 height: 320,
               ),
-              const SizedBox(
-                height: 80,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
               const Text(
                 'Stay On Track:\nSet Task Notifications!',
@@ -44,8 +44,8 @@ class _ScreenFourState extends State<ScreenFour> {
                     fontWeight: FontWeight.w800, fontSize: 20, wordSpacing: 2),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
               const Text(
                 'Set reminders for each task and let us \nkeep you in sync with your goals. ',
@@ -53,11 +53,12 @@ class _ScreenFourState extends State<ScreenFour> {
                     fontSize: 17, fontWeight: FontWeight.w400, wordSpacing: 1),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 140,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.16,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 230.0),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.5),
                 child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
