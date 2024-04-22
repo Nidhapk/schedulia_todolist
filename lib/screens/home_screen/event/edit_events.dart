@@ -39,8 +39,7 @@ class _MyWidgetState extends State<EditEvents> {
     eventTitleController.text = widget.index.eventTitle ?? '';
     eventdescriptionController.text = widget.index.eventDescription ?? '';
     eventLocationController.text = widget.index.eventlocation ?? '';
-    selectedDate =
-        DateFormat('dd-MMM-yyy').parse(widget.index.eventDate ?? '');
+    selectedDate = DateFormat('dd-MMM-yyy').parse(widget.index.eventDate ?? '');
     imagepath = File(widget.index.eventImage ?? '');
     selectedTime = TimeOfDay.fromDateTime(
         DateFormat('hh:mm a').parse(widget.index.eventTime!));
@@ -114,8 +113,8 @@ class _MyWidgetState extends State<EditEvents> {
                                   Icons.calendar_month_outlined,
                                   color: grey,
                                 )),
-                            Text(DateFormat('dd-MMM-yyy')
-                                .format(selectedDate!)),
+                            Text(
+                                DateFormat('dd-MMM-yyy').format(selectedDate!)),
                           ],
                         ),
                         Row(
@@ -174,7 +173,7 @@ class _MyWidgetState extends State<EditEvents> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         EventButton(
-                            width: 300,
+                            width: 340,
                             text: 'Edit',
                             onPressed: () async {
                               await editButtonOnClicked(widget.keyy);
