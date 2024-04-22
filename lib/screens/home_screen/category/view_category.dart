@@ -31,10 +31,6 @@ class Viewcategory extends StatefulWidget {
 }
 
 class _ViewcategoryState extends State<Viewcategory> {
-  bool? valueChecked1;
-  bool? valueChecked2;
-  ValueNotifier checknotifier = ValueNotifier(false);
-  ValueNotifier checknotifier2 = ValueNotifier(false);
   DateTime todayy = DateTime.now();
   bool showFullText = false;
 
@@ -103,8 +99,15 @@ class _ViewcategoryState extends State<Viewcategory> {
                         var keyValue = valueList[index].key;
 
                         TaskModel modelValue = valueList[index];
-                        valueChecked1 = valueList[index].iscompleted;
-                        valueChecked2 = valueList[index].isImportant;
+                        bool valueChecked1 =
+                            valueList[index].iscompleted ?? false;
+                        bool valueChecked2 =
+                            valueList[index].isImportant ?? false;
+                        ValueNotifier checknotifier =
+                            ValueNotifier(valueChecked1);
+                        ValueNotifier checknotifier2 =
+                            ValueNotifier(valueChecked2);
+
                         return Padding(
                           padding: const EdgeInsets.only(left: 10, right: 15),
                           child: NewCustomTimeLine(
@@ -176,12 +179,18 @@ class _ViewcategoryState extends State<Viewcategory> {
                                     builder: (context) =>
                                         ViewTask(taskIndex: valueList[index])));
                               },
-                              onItem1: () {
-                                checknotifier.value = !checknotifier.value;
+                              onItem1: () async {
                                 valueChecked1 = !valueChecked1!;
-                                taskDone(
-                                    modelValue, keyValue, modelValue.taskType!);
-                                initializeTask();
+                                checknotifier.value = valueChecked1;
+                                print('onitem1');
+
+                                await taskDone(
+                                    modelValue,
+                                    keyValue,
+                                    modelValue.taskType!,
+                                    valueChecked1,
+                                    valueChecked2);
+                                await initializeTask();
                               },
                               item1: ValueListenableBuilder(
                                 valueListenable: checknotifier,
@@ -206,13 +215,18 @@ class _ViewcategoryState extends State<Viewcategory> {
                                   );
                                 },
                               ),
-                              onItem2: () {
-                                checknotifier2.value = !checknotifier2.value;
-
+                              onItem2: () async {
                                 valueChecked2 = !valueChecked2!;
-                                taskDone(
-                                    modelValue, keyValue, modelValue.taskType!);
-                                initializeTask();
+                                checknotifier2.value = valueChecked2;
+                                print('onitem2');
+                                await taskDone(
+                                    modelValue,
+                                    keyValue,
+                                    modelValue.taskType!,
+                                    valueChecked1,
+                                    valueChecked2);
+                                await initializeTask();
+                                print('yes');
                               },
                               item2: ValueListenableBuilder(
                                 valueListenable: checknotifier2,
@@ -256,13 +270,14 @@ class _ViewcategoryState extends State<Viewcategory> {
     );
   }
 
-  Future taskDone(TaskModel task, int key, String category) async {
+  Future taskDone(TaskModel task, int key, String category, bool valueChecked1,
+      bool valueChecked2) async {
     task.iscompleted = valueChecked1;
     task.isImportant = valueChecked2;
     await TaskFunctions().editTask(task, key);
   }
 
-  initializeTask() async {
+  Future initializeTask() async {
     await CategoryFunctions().filterTaskByCategory(widget.category);
     await CategoryFunctions().filterTaskByCategoryOnThisDay(todayy);
   }

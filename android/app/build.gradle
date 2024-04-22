@@ -26,6 +26,7 @@ android {
     namespace "com.example.schedulia"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
+    
 
     compileOptions {
         coreLibraryDesugaringEnabled true
