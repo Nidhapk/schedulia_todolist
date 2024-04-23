@@ -50,7 +50,9 @@ class PrivacyPolicyScrren extends StatelessWidget {
                 ),
               ),
               Text(
-                  'SCHEDULIA - The Mini Scheduler app may allow you to upload photos for use within the app. These photos are stored locally on your device and are not transmitted to external servers.'),
+                'SCHEDULIA - The Mini Scheduler app may allow you to upload photos for use within the app. These photos are stored locally on your device and are not transmitted to external servers.',
+                style: MyTextStyle.privacypolicybodyStyle,
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 20),
                 child: Text(
@@ -59,7 +61,18 @@ class PrivacyPolicyScrren extends StatelessWidget {
                 ),
               ),
               Text(
-                  'We want to inform you that whenever you use our Service, in a case of an error in the app, we may collect data and information (through third-party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.'),
+                  'We want to inform you that whenever you use our Service, in a case of an error in the app, we may collect data and information (through third-party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.',
+                  style: MyTextStyle.privacypolicybodyStyle),
+              Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 20),
+                child: Text(
+                  'Information Sharing',
+                  style: MyTextStyle.privacypolicyHeadingStyle,
+                ),
+              ),
+              Text(
+                  'The app may not share your personal information with any third-party services or vendors.\n\nWe may disclose your personal information if required to do  so by law or in response to valid legal requests from government authorities or law enforcement agencies.',
+                  style: MyTextStyle.privacypolicybodyStyle),
               Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 20),
                 child: Text(
@@ -68,7 +81,9 @@ class PrivacyPolicyScrren extends StatelessWidget {
                 ),
               ),
               Text(
-                  'We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.'),
+                'We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.',
+                style: MyTextStyle.privacypolicybodyStyle,
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 20),
                 child: Text(
@@ -77,7 +92,8 @@ class PrivacyPolicyScrren extends StatelessWidget {
                 ),
               ),
               Text(
-                  'These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13 years of age. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to take necessary actions.'),
+                  'These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13 years of age. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to take necessary actions.',
+                  style: MyTextStyle.privacypolicybodyStyle),
               Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 20),
                 child: Text(
@@ -86,7 +102,7 @@ class PrivacyPolicyScrren extends StatelessWidget {
                 ),
               ),
               Text(
-                'We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.\n\n This policy is effective as of 7-Apr-2024.',
+                'We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.\n\n This policy is effective as of 23-Apr-2024.',
                 style: MyTextStyle.privacypolicybodyStyle,
               ),
               Padding(
@@ -97,7 +113,8 @@ class PrivacyPolicyScrren extends StatelessWidget {
                 ),
               ),
               Text(
-                  'If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at pknidhanidh@gmail.com.')
+                  'If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at pknidhanidh@gmail.com.',
+                  style: MyTextStyle.privacypolicybodyStyle)
             ],
           ),
         ),
