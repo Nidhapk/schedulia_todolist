@@ -29,6 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? image;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 231, 251, 0.91),
       body: Center(
@@ -44,8 +45,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.0),
               ),
-              const SizedBox(
-                height: 40.0,
+              SizedBox(
+                height: height*0.04,
               ),
               const Text(
                 'Take a step forward to feel\nmore organized',
@@ -53,8 +54,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: TextStyle(
                     color: Colors.black87, fontSize: 18.0, letterSpacing: 2),
               ),
-              const SizedBox(
-                height: 40.0,
+              SizedBox(
+                height: height*0.05
+                ,
               ),
               Stack(
                 children: [

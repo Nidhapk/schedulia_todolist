@@ -8,11 +8,12 @@ class LocalNotificationService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static Future<void> requestNotificationPermissions() async {
-    await flutterLocalNotificationsPlugin
+  static Future<bool?> requestNotificationPermissions() async {
+    final bool? permissionGranted = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
+    return permissionGranted;
   }
 
   static onTap(details) {}

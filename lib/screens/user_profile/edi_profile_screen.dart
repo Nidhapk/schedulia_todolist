@@ -31,6 +31,7 @@ class _EditProfileState extends State<EditProfile> {
       userListNotifier.value[keys.indexOf(userKey!)].userimage ?? '';
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
@@ -49,9 +50,9 @@ class _EditProfileState extends State<EditProfile> {
               builder:
                   (BuildContext context, List<UserModel> userlist, child_) {
                 return Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20.0,
-                    right: 20,
+                  padding:  EdgeInsets.only(
+                    left: width>600?width*0.3:width*0.1,
+                    right: width>600?width*0.3:width*0.1,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -114,21 +115,21 @@ class _EditProfileState extends State<EditProfile> {
                       const SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(appBarColor),
-                            foregroundColor: MaterialStatePropertyAll(white)),
-                        onPressed: () async {
-                          await updateUser()
-                              .then((value) => Navigator.of(context).pop());
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 18.0, horizontal: 135),
-                          child: Text('Edit'),
+                      SizedBox(
+                        width: width>600?width*0.7:width*0.9,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            fixedSize: MaterialStatePropertyAll(Size(width, 50)),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(appBarColor),
+                              foregroundColor: MaterialStatePropertyAll(white)),
+                          onPressed: () async {
+                            await updateUser()
+                                .then((value) => Navigator.of(context).pop());
+                          },
+                            child:const  Text('Edit'),
+                          // width: 300,
                         ),
-                        // width: 300,
                       ),
                     ],
                   ),

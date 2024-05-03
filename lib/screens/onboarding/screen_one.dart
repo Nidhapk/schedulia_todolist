@@ -8,50 +8,66 @@ class ScreenOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
-              const Circle(),
+              Circle(width:370,
+                height: height * 0.5,
+              ),
               Positioned(
-                top: 120.0,
-                left: 40.0,
+                top: 100.0,
+                left: 20.0,
                 child: SvgPicture.asset(
                   'lib/assets/welcome_screen_one/undraw_enter_uhqk (1).svg',
-                  width: 260.0,
-                  height: 260.0,
+                  width: width * 0.23
+                  // 260.0
+                  ,
+                  height: height * 0.36
+                  //260.0
+                  ,
                 ),
               )
             ],
           ),
           Padding(
             padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.1,
+                left:width<600? width * 0.1:width*0.3,
                 // 40.0
-                top: MediaQuery.of(context).size.width * 0.15
+                top: height* 0.05
                 //70.0
                 ),
-            child: const Text(
-              'Get things\ndone with\nSCHEDULIA',
-              style: TextStyle(fontSize: 45.0, height: 1.2),
-            ),
+            
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Get things done with \nSCHEDULIA',
+                      style: TextStyle(fontSize: height*0.063, height: 1.2),
+                    ),
+                  ),
+                ],
+              ),
+                  
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.1,
-              top: MediaQuery.of(context).size.width * 0.05,
+              left: width<600? width * 0.1:width*0.3,
+              top: height * 0.02,
             ),
-            child: const Text(
+            child:  Text(
               'let\'s help you meet up your tasks. ',
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: height*0.024),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.1,
-              top: MediaQuery.of(context).size.width * 0.05,
+              left: width<600? width * 0.1:width*0.3,
+              top: height * 0.03,
             ),
             child: ElevatedButton(
               onPressed: () {

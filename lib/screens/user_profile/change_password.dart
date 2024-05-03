@@ -25,6 +25,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(title: const Text('Change Password')),
       body: SingleChildScrollView(
@@ -86,7 +87,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     });
                   },
                   obscureText: obscureText3,
-                  icon: obscureText3?Icons.visibility_off : Icons.visibility,
+                  icon: obscureText3 ? Icons.visibility_off : Icons.visibility,
                   mode: AutovalidateMode.onUserInteraction,
                   controller: confirmNewPasswordController,
                   validator: (value) {
@@ -99,15 +100,18 @@ class _ChangePasswordState extends State<ChangePassword> {
                       return null;
                     }
                   },
-                  hintText: 'Confirm password'),
-              Custombutton(
-                onpressed: () async {
-                  await editButtonOnClicked().then((value) =>
-                      CustomSnackBar.show(
-                          context, 'Password has been successfully changed'));
-                },
-                text: 'Edit',
-                //width: 300,
+                  hintText: 'Confirm password'),SizedBox(height: 20,),
+              SizedBox(
+                width: width > 600 ? width * 0.4 : width * 0.8,
+                child: Custombutton(
+                  onpressed: () async {
+                    await editButtonOnClicked().then((value) =>
+                        CustomSnackBar.show(
+                            context, 'Password has been successfully changed'));
+                            
+                  },
+                  text: 'Edit',
+                ),
               ),
             ],
           ),

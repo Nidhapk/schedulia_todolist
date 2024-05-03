@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.2.6 <4.0.0'
@@ -74,9 +74,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/assets/welcome_screen_one/undraw_enter_uhqk (1).svg
-    - lib/assets/welcome_screen_three/Screenshot 2024-01-24 111043.png
-    - lib/assets/welcome_screen_three/WhatsApp Image 2024-01-29 at
-      17.51.09_10ee5cfc.jpg
     - lib/assets/profile/profile_icon.jpg
     - lib/assets/addCategory/undraw_palette_-110-c.svg
     - lib/assets/calender/undraw_happy_music_g6wc (1).svg
@@ -97,7 +94,7 @@ flutter:
     - lib/assets/Events-bro.svg
     - lib/assets/Events-pana.svg
     - lib/assets/Prototyping process-pana.svg
-    - lib/assets/welcome_screen_three/Screenshot_20240416_092438.jpg
+    - lib/assets/welcome_screen_three/task_screenshot.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

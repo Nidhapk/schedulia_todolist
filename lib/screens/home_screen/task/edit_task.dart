@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:schedulia/class/custom_textstyle.dart';
@@ -64,6 +65,7 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
+    final width=MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: appBarColor,
         body: CustomScrollView(
@@ -101,7 +103,7 @@ class _EditTaskState extends State<EditTask> {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: SingleChildScrollView(
                         child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      padding:  EdgeInsets.only(left:  width < 600 ? width * 0.04 : width * 0.3, right:  width < 600 ? width * 0.04 : width * 0.3,),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -383,7 +385,7 @@ class _EditTaskState extends State<EditTask> {
                             hintText: 'Enter discription here',
                             customController: taskNoteController,
                             maxLines: 5,
-                          ),
+                          ),!kIsWeb?
                           ValueListenableBuilder(
                             valueListenable: reminderNotifier,
                             builder: (context, value, child) {
@@ -442,54 +444,56 @@ class _EditTaskState extends State<EditTask> {
                                     )),
                               );
                             },
-                          ),
+                          ):const SizedBox(),
                           Padding(
                               padding:
                                   const EdgeInsets.only(top: 20.0, bottom: 20),
-                              child: ElevatedButton(
-                                  onPressed: () async {
-                                    if (reminderOn == true) {
-                                      DateTime pickedDate = DateTime.parse(
-                                          dateController.text.trim());
-                                      String time =
-                                          startTimeController.text.trim();
-                                      List parts = time.split(' ');
-                                      List timeParts = parts[0].split(':');
-                                      int hour = int.parse(timeParts[0]);
-                                      int minutes = int.parse(timeParts[1]);
-                                      String period = parts[1]; // AM or PM
-                                      if (period == "PM" && hour != 12) {
-                                        hour += 12;
+                              child: SizedBox( width: width < 600 ? width * 0.96 : width * 0.8,
+                                child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (reminderOn == true) {
+                                        DateTime pickedDate = DateTime.parse(
+                                            dateController.text.trim());
+                                        String time =
+                                            startTimeController.text.trim();
+                                        List parts = time.split(' ');
+                                        List timeParts = parts[0].split(':');
+                                        int hour = int.parse(timeParts[0]);
+                                        int minutes = int.parse(timeParts[1]);
+                                        String period = parts[1]; // AM or PM
+                                        if (period == "PM" && hour != 12) {
+                                          hour += 12;
+                                        }
+                                        TimeOfDay pickedTime = TimeOfDay(
+                                            hour: hour, minute: minutes);
+                                        await LocalNotificationService
+                                            .showScheduledNotification(
+                                                time: pickedTime,
+                                                date: pickedDate,
+                                                title:
+                                                    'Hey ${currentUser?.userName ?? 'there'}, Don\'t forget about your task.',
+                                                body:
+                                                    'Title : ${titleController.text.trim()}\nGet it done now!');
                                       }
-                                      TimeOfDay pickedTime = TimeOfDay(
-                                          hour: hour, minute: minutes);
-                                      await LocalNotificationService
-                                          .showScheduledNotification(
-                                              time: pickedTime,
-                                              date: pickedDate,
-                                              title:
-                                                  'Hey ${currentUser?.userName ?? 'there'}, Don\'t forget about your task.',
-                                              body:
-                                                  'Title : ${titleController.text.trim()}\nGet it done now!');
-                                    }
-                                    await updateTask(
-                                      widget.key1,
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      appBarColor,
+                                      await updateTask(
+                                        widget.key1,
+                                      );
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        appBarColor,
+                                      ),
+                                      foregroundColor:
+                                          MaterialStatePropertyAll(white),
+                                      fixedSize: const MaterialStatePropertyAll(
+                                        Size(380.0, 50.0),
+                                      ),
                                     ),
-                                    foregroundColor:
-                                        MaterialStatePropertyAll(white),
-                                    fixedSize: const MaterialStatePropertyAll(
-                                      Size(380.0, 50.0),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'Edit',
-                                    style: TextStyle(fontSize: 20.0),
-                                  )))
+                                    child: const Text(
+                                      'Edit',
+                                      style: TextStyle(fontSize: 20.0),
+                                    )),
+                              ))
                         ],
                       ),
                     )),

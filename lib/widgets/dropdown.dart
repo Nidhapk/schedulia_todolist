@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CustomDropdownButton extends StatelessWidget {
   final String? selectedValue;
   final ValueChanged onChanged;
@@ -8,15 +7,16 @@ class CustomDropdownButton extends StatelessWidget {
   final TextEditingController? controller;
 
   const CustomDropdownButton({
-    Key? key,
+    super.key,
     this.selectedValue,
     required this.onChanged,
     required this.items,
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 213, 204, 219),
@@ -24,7 +24,7 @@ class CustomDropdownButton extends StatelessWidget {
             color: Colors.black, //width: 3.0
           ),
           borderRadius: BorderRadius.circular(30.0)),
-      width: 370,
+      width:  width<600?width*0.96:width*0.8,
       child: DropdownButtonHideUnderline(
         child: Padding(
           padding: const EdgeInsets.only(right: 18.0),

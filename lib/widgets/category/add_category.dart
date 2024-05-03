@@ -7,9 +7,11 @@ class AddCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return SizedBox(
-      height: 178,
-      width: 178,
+      height:width< 600?height*0.1:100,
+      width:width<600? width*0.1:width*0.07,
       child: DottedBorder(
         borderType: BorderType.RRect,
         radius: const Radius.circular(20),

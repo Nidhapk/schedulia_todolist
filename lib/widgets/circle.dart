@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Circle extends StatelessWidget {
-  const Circle({super.key});
+  final double? height;
+  final double? width;
+  const Circle({super.key,this.height,this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,10 @@ class Circle extends StatelessWidget {
         child: Transform.scale(
           scale: 1.2,
           child: Container(
-            height: 400.0,
-            width: 430.0,
+            height: height,
+            width: width
+            //370.0
+            ,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(500)),
               color: Color.fromRGBO(198, 176, 218, 0.6),

@@ -71,7 +71,7 @@ class _ViewcategoryState extends State<Viewcategory> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), color: white),
+            borderRadius: const BorderRadius.only(topRight: Radius.circular(30),topLeft: Radius.circular(30)), color: white),
         child: Column(
           children: [
             CategoryTablecalender(

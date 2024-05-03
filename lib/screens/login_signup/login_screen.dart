@@ -34,6 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height=MediaQuery.of(context).size.height;
     //getCurrentUserKey();
     return Scaffold(
       body: SingleChildScrollView(
@@ -62,7 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: EdgeInsets.only(
+                      top: 20,
+                      left: width > 600 ? width * 0.3 : width * 0.1,right: width > 600 ? width * 0.3 : width * 0.1),
                   child: TextFormField(
                     controller: userNameController,
                     decoration: InputDecoration(
@@ -76,7 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  padding:  EdgeInsets.only(top: height*0.03,
+                      
+                      left: width > 600 ? width * 0.3 : width * 0.1,right: width > 600 ? width * 0.3 : width * 0.1),
                   child: TextFormField(
                     controller: passwordController,
                     obscureText: obscureText,
@@ -102,37 +108,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
+               SizedBox(
+                  height: height*0.03,
                 ),
-                ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(appBarColor),
-                        foregroundColor: MaterialStatePropertyAll(white)),
-                    onPressed: () async {
-                      final checkVariable = await UserFunctions()
-                          .validateUserLogin(userNameController.text.trim(),
-                              passwordController.text.trim());
-                              
-                      if (checkVariable != null) {
-                        await UserFunctions().getCurrentUserKey();
-
-                        await UserFunctions()
-                            .checkUserLoggedIn(true, userKey!)
-                            .then((value) => Navigator.of(context)
-                              ..pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomeScreen()),
-                                  (route) => false));
-                      } else {
-                        showSnackBar(context);
-                      }
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 130.0),
-                      child: Text('LOGIN'),
-                    )),
+                SizedBox(height: 60,width: width > 600 ? width * 0.4 : width * 0.8,
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(appBarColor),
+                          foregroundColor: MaterialStatePropertyAll(white)),
+                      onPressed: () async {
+                        final checkVariable = await UserFunctions()
+                            .validateUserLogin(userNameController.text.trim(),
+                                passwordController.text.trim());
+                  
+                        if (checkVariable != null) {
+                          await UserFunctions().getCurrentUserKey();
+                  
+                          await UserFunctions()
+                              .checkUserLoggedIn(true, userKey!)
+                              .then((value) => Navigator.of(context)
+                                ..pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => const HomeScreen()),
+                                    (route) => false));
+                        } else {
+                          showSnackBar(context);
+                        }
+                      },
+                        child:const  Text('LOGIN'),
+                      )
+                ),
                 const SizedBox(
                   height: 30,
                 ),

@@ -12,7 +12,6 @@ import 'package:schedulia/widgets/category/user_container.dart';
 import 'package:schedulia/widgets/colors.dart';
 import 'package:schedulia/widgets/perfomance/custom_progress_indicator.dart';
 import 'package:schedulia/widgets/perfomance/perfomance_circle.dart';
-import 'package:schedulia/widgets/popup/custom_popup.dart';
 
 // ignore: must_be_immutable
 class PerfomanceScreen extends StatefulWidget {
@@ -28,15 +27,15 @@ class _PerfomanceScreenState extends State<PerfomanceScreen> {
   void initState() {
     super.initState();
     initialize();
-
-    //TaskFunctions().getTaskDone();
+    TaskFunctions().getTaskNotDone();
+    TaskFunctions().getTaskDone();
   }
 
   @override
   Widget build(BuildContext context) {
     int userPerfomance = perfomaceONThisDay();
-    TaskFunctions().getTaskNotDone();
-    TaskFunctions().getTaskDone();
+    final height = MediaQuery.of(context).size.height;
+
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
@@ -44,23 +43,14 @@ class _PerfomanceScreenState extends State<PerfomanceScreen> {
         const Color.fromARGB(255, 250, 250, 252),
         white
       ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-      child: Column(
-        children: [
-          ValueListenableBuilder(
-              valueListenable: userListNotifier,
-              builder:
-                  (BuildContext context, List<UserModel> userList, Widget? _) {
-                //UserFunctions().getCurrentUser(userKey!);
-                return Stack(children: [
-                  UserContainer(
-                      // userModel: userList[int.parse(userKey!)],
-                      text: userList[keys.indexOf(userKey!)].name != null
-                          ? userList[keys.indexOf(userKey!)].name!
-                          : '',
-                      img: userList[keys.indexOf(userKey!)].userimage ?? ''),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 320, top: 50),
-                    child: CustomPopUpButton(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ValueListenableBuilder(
+                valueListenable: userListNotifier,
+                builder:
+                    (BuildContext context, List<UserModel> userList, Widget? _) {
+                  return UserContainer(
                       color: white,
                       items: [
                         MenuItem(
@@ -98,8 +88,8 @@ class _PerfomanceScreenState extends State<PerfomanceScreen> {
                                       onpressedDelete: () async {
                                         await UserFunctions()
                                             .checkUserLoggedIn(false, userKey!)
-                                            .then((value) => Navigator
-                                                .pushNamedAndRemoveUntil(
+                                            .then((value) =>
+                                                Navigator.pushNamedAndRemoveUntil(
                                                     context,
                                                     '/loginPage',
                                                     (route) => false));
@@ -108,86 +98,86 @@ class _PerfomanceScreenState extends State<PerfomanceScreen> {
                               );
                             })
                       ],
-                    ),
-                  )
-                ]);
-              }),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ValueListenableBuilder(
-                valueListenable: taskDoneNotifier,
-                builder: (context, List<TaskModel> taskDoneList, child_) {
-                  return PerfomanceCircle(
-                    color: darkpurple,
-                    icon: Icons.circle_outlined,
-                    text1: taskDoneList.length.toString(),
-                    image:
-                        'lib/assets/perfomance/circle-outline-of-small-size-purple.png',
-                    text2: 'Completed',
-                  );
-                },
-              ),
-              ValueListenableBuilder(
-                valueListenable: taskNotDoneNotifier,
-                builder: (context, List<TaskModel> taskNotDone, child) {
-                  return PerfomanceCircle(
-                    color: const Color.fromARGB(255, 205, 193, 218),
-                    icon: Icons.circle_outlined,
-                    text1: taskNotDone.length.toString(),
-                    // image:
-                    //     'lib/assets/perfomance/circle-outline-of-small-size-red.png',
-                    text2: 'Not Completed',
-                  );
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 60),
-          Center(
-            child: ValueListenableBuilder(
-              valueListenable: perfomanceNotifier,
-              builder: (context, perfomance, child_) {
-                return GradientCircularPercentIndicator(
-                    radius: 100.0, percent: perfomance! / 100);
-              },
+                      text: userList[keys.indexOf(userKey!)].name != null
+                          ? userList[keys.indexOf(userKey!)].name!
+                          : '',
+                      img: userList[keys.indexOf(userKey!)].userimage ?? '');
+                }),
+             SizedBox(height: height*0.02),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: taskDoneNotifier,
+                  builder: (context, List<TaskModel> taskDoneList, child_) {
+                    return PerfomanceCircle(
+                      color: darkpurple,
+                      icon: Icons.circle_outlined,
+                      text1: taskDoneList.length.toString(),
+                      image:
+                          'lib/assets/perfomance/circle-outline-of-small-size-purple.png',
+                      text2: 'Completed',
+                    );
+                  },
+                ),
+                ValueListenableBuilder(
+                  valueListenable: taskNotDoneNotifier,
+                  builder: (context, List<TaskModel> taskNotDone, child) {
+                    return PerfomanceCircle(
+                      color: const Color.fromARGB(255, 205, 193, 218),
+                      icon: Icons.circle_outlined,
+                      text1: taskNotDone.length.toString(),
+                      text2: 'Not Completed',
+                    );
+                  },
+                ),
+              ],
             ),
-          ),
-          const SizedBox(
-            height: 60,
-          ),
-          if (userPerfomance >= 80)
-            const Text(
-              'Congratulations! \nYour performance is outstanding!\n Keep up the great work!',
-              textAlign: TextAlign.center,
-              style: MyTextStyle.userFeedbackStyle,
-            )
-          else if (userPerfomance >= 50 && userPerfomance < 80)
-            const Text(
-              'Good job!\n You\'re making progress with your tasks. \nKeep it up!',
-              textAlign: TextAlign.center,
-              style: MyTextStyle.userFeedbackStyle,
-            )
-          else if (userPerfomance >= 20 && userPerfomance < 50)
-            const Text(
-              'You\'ve completed fewer tasks. \nLet\'s try to tackle more tasks today!',
-              textAlign: TextAlign.center,
-              style: MyTextStyle.userFeedbackStyle,
-            )
-          else if (userPerfomance == 0)
-            const Text(
-              'You haven\'t started yet, Let\'s get started!',
-              textAlign: TextAlign.center,
-              style: MyTextStyle.userFeedbackStyle,
-            )
-          else
-            const Text(
-              'It looks like there\'s room for improvement.\n Stay Focused!',
-              textAlign: TextAlign.center,
-              style: MyTextStyle.userFeedbackStyle,
-            )
-        ],
+           SizedBox(height: height*0.04),
+            Center(
+              child: ValueListenableBuilder(
+                valueListenable: perfomanceNotifier,
+                builder: (context, perfomance, child_) {
+                  return GradientCircularPercentIndicator(
+                      radius: height*0.12, percent: perfomance! / 100);
+                },
+              ),
+            ),
+           SizedBox(
+              height: height*0.04,
+            ),
+            if (userPerfomance >= 80)
+              const Text(
+                'Congratulations! \nYour performance is outstanding!\n Keep up the great work!',
+                textAlign: TextAlign.center,
+                style: MyTextStyle.userFeedbackStyle,
+              )
+            else if (userPerfomance >= 50 && userPerfomance < 80)
+              const Text(
+                'Good job!\n You\'re making progress with your tasks. \nKeep it up!',
+                textAlign: TextAlign.center,
+                style: MyTextStyle.userFeedbackStyle,
+              )
+            else if (userPerfomance >= 20 && userPerfomance < 50)
+              const Text(
+                'You\'ve completed fewer tasks. \nLet\'s try to tackle more tasks today!',
+                textAlign: TextAlign.center,
+                style: MyTextStyle.userFeedbackStyle,
+              )
+            else if (userPerfomance == 0)
+              const Text(
+                'You haven\'t started yet, Let\'s get started!',
+                textAlign: TextAlign.center,
+                style: MyTextStyle.userFeedbackStyle,
+              )
+            else
+              const Text(
+                'It looks like there\'s room for improvement.\n Stay Focused!',
+                textAlign: TextAlign.center,
+                style: MyTextStyle.userFeedbackStyle,
+              )
+          ],
+        ),
       ),
     );
   }

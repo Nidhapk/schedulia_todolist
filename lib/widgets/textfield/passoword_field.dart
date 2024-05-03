@@ -21,10 +21,11 @@ class PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
+      padding:  EdgeInsets.only(
+        left: width<600?width*0.1:width*0.3,
+        right: width<600?width*0.1:width*0.3,
         top: 20,
       ),
       child: TextFormField(
@@ -32,7 +33,7 @@ class PasswordField extends StatelessWidget {
         controller: controller,
         validator: validator,
         obscureText: obscureText,
-        decoration: InputDecoration(
+        decoration: InputDecoration(errorMaxLines: 5,
             suffixIcon: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: IconButton(onPressed: onPressed, icon: Icon(icon)),

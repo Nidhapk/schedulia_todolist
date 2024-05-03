@@ -13,22 +13,19 @@ class Custombutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+    final width = MediaQuery.of(context).size.width;
+    return
 
       // width: width,
-      child: ElevatedButton(
+      ElevatedButton(
         style: ButtonStyle(
+  fixedSize: MaterialStatePropertyAll(Size(width, 50)),
           backgroundColor: MaterialStatePropertyAll(appBarColor),
           foregroundColor: MaterialStatePropertyAll(white),
         ),
         onPressed: onpressed,
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 18, bottom: 18, left: 135, right: 135),
           child: Text(text),
-        ),
-      ),
+    
     );
   }
 }

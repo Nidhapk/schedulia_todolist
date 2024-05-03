@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, use_build_context_synchronousl, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:intl/intl.dart';
 import 'package:schedulia/class/custom_textstyle.dart';
 import 'package:schedulia/db_functions/category_db.dart';
@@ -58,9 +59,12 @@ class _AddNewTaskState extends State<AddNewTask> {
   final taskNoteController = TextEditingController();
 
   bool? reminderOn = false;
-
+  
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    //bool? isAndroid=Platform.isAndroid;
+
     CategoryFunctions().currentUserCategory(userKey!);
     return Scaffold(
         backgroundColor: appBarColor,
@@ -99,7 +103,9 @@ class _AddNewTaskState extends State<AddNewTask> {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: SingleChildScrollView(
                         child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      padding: EdgeInsets.only(
+                          left: width < 600 ? width * 0.04 : width * 0.3,
+                          right: width < 600 ? width * 0.04 : width * 0.3),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -216,7 +222,8 @@ class _AddNewTaskState extends State<AddNewTask> {
                                         customController: startTimeController,
                                         //width: 150,
                                         hintText: 'Choose time',
-                                        mode: AutovalidateMode.onUserInteraction,
+                                        mode:
+                                            AutovalidateMode.onUserInteraction,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Set starting time';
@@ -380,111 +387,119 @@ class _AddNewTaskState extends State<AddNewTask> {
                             hintText: 'Enter discription here',
                             customController: taskNoteController,
                             maxLines: 5,
-                          ),
+                          ),!kIsWeb?
                           ValueListenableBuilder(
                             valueListenable: reminderNotifier,
                             builder: (context, value, child) {
                               return Padding(
                                 padding: const EdgeInsets.only(
                                     top: 30.0, bottom: 10),
-                                child: ElevatedButton(
-                                    onPressed: () async {
-                                      reminderNotifier.value =
-                                          !reminderNotifier.value;
-                                      reminderOn = !reminderOn!;
-                                    },
-                                    style: ButtonStyle(
-                                        shape: MaterialStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                side: BorderSide(
-                                                    color: reminderOn == true
+                                child:  ElevatedButton(
+                                        onPressed: () async {
+                                          
+                                          reminderNotifier.value =
+                                              !reminderNotifier.value;
+                                          reminderOn = !reminderOn!;
+                                        },
+                                        style: ButtonStyle(
+                                            shape: MaterialStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    side: BorderSide(
+                                                        color:
+                                                            reminderOn == true
+                                                                ? appBarColor
+                                                                : Colors.black,
+                                                        width: 1))),
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    reminderOn == true
                                                         ? appBarColor
-                                                        : Colors.black,
-                                                    width: 1))),
-                                        backgroundColor:
-                                            MaterialStatePropertyAll(
+                                                        : white)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  reminderOn == true
+                                                      ? 'Reminder is On'
+                                                      : 'Set Reminder',
+                                                  style: TextStyle(
+                                                      color: reminderOn == true
+                                                          ? white
+                                                          : Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Icon(
                                                 reminderOn == true
-                                                    ? appBarColor
-                                                    : white)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                              reminderOn == true
-                                                  ? 'Reminder is On'
-                                                  : 'Set Reminder',
-                                              style: TextStyle(
-                                                  color: reminderOn == true
-                                                      ? white
-                                                      : Colors.black,
-                                                  fontWeight: FontWeight.bold)),
-                                          const SizedBox(
-                                            width: 20,
+                                                    ? Icons.notifications_active
+                                                    : Icons.notifications_none,
+                                                color: reminderOn == true
+                                                    ? white
+                                                    : Colors.black,
+                                              )
+                                            ],
                                           ),
-                                          Icon(
-                                            reminderOn == true
-                                                ? Icons.notifications_active
-                                                : Icons.notifications_none,
-                                            color: reminderOn == true
-                                                ? white
-                                                : Colors.black,
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              );
+                                        ))
+                                
+                            );
                             },
-                          ),
+                          ):const SizedBox(),
                           Padding(
                               padding:
-                                  const EdgeInsets.only(top: 20.0, bottom: 20),
-                              child: ElevatedButton(
-                                  onPressed: () async {
-                                    if (reminderOn == true) {
-                                      DateTime pickedDate = DateTime.parse(
-                                          dateController.text.trim());
-                                      String time =
-                                          startTimeController.text.trim();
-                                      List parts = time.split(' ');
-                                      List timeParts = parts[0].split(':');
-                                      int hour = int.parse(timeParts[0]);
-                                      int minutes = int.parse(timeParts[1]);
-                                      String period = parts[1]; // AM or PM
-                                      if (period == "PM" && hour != 12) {
-                                        hour += 12;
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              child: SizedBox(
+                                width: width < 600 ? width * 0.96 : width * 0.8,
+                                child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (reminderOn == true) {
+                                        DateTime pickedDate = DateTime.parse(
+                                            dateController.text.trim());
+                                        String time =
+                                            startTimeController.text.trim();
+                                        List parts = time.split(' ');
+                                        List timeParts = parts[0].split(':');
+                                        int hour = int.parse(timeParts[0]);
+                                        int minutes = int.parse(timeParts[1]);
+                                        String period = parts[1]; // AM or PM
+                                        if (period == "PM" && hour != 12) {
+                                          hour += 12;
+                                        }
+                                        TimeOfDay pickedTime = TimeOfDay(
+                                            hour: hour, minute: minutes);
+                                        await LocalNotificationService
+                                            .showScheduledNotification(
+                                                time: pickedTime,
+                                                date: pickedDate,
+                                                title:
+                                                    'Hey ${currentUser?.userName ?? 'there'}, Don\'t forget about your task.',
+                                                body:
+                                                    'Title : ${titleController.text.trim()}\nGet it done now!');
                                       }
-                                      TimeOfDay pickedTime = TimeOfDay(
-                                          hour: hour, minute: minutes);
-                                      await LocalNotificationService
-                                          .showScheduledNotification(
-                                              time: pickedTime,
-                                              date: pickedDate,
-                                              title:
-                                                  'Hey ${currentUser?.userName ?? 'there'}, Don\'t forget about your task.',
-                                              body:
-                                                  'Title : ${titleController.text.trim()}\nGet it done now!');
-                                    }
-                                    await onAddTaskButtonClicked();
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      appBarColor,
+                                      await onAddTaskButtonClicked();
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        appBarColor,
+                                      ),
+                                      foregroundColor:
+                                          MaterialStatePropertyAll(white),
+                                      fixedSize: const MaterialStatePropertyAll(
+                                        Size(380.0, 50.0),
+                                      ),
                                     ),
-                                    foregroundColor:
-                                        MaterialStatePropertyAll(white),
-                                    fixedSize: const MaterialStatePropertyAll(
-                                      Size(380.0, 50.0),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'Save',
-                                    style: TextStyle(fontSize: 20.0),
-                                  )))
+                                    child: const Text(
+                                      'Save',
+                                      style: TextStyle(fontSize: 20.0),
+                                    )),
+                              ))
                         ],
                       ),
                     )),
@@ -512,7 +527,6 @@ class _AddNewTaskState extends State<AddNewTask> {
           startTime: _startTime,
           endTime: _endTime,
           reminder: reminderOn,
-          // repeat: _repeat,
           taskNote: _taskNote,
           taskType: _taskType,
           isImportant: false,

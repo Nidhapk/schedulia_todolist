@@ -36,71 +36,69 @@ class _TaskTabBarState extends State<TaskTabBar>
       ),
       body: Container(
         color: white,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Column(children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 151, 145, 153),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TabBar(
-                    dividerHeight: 0,
-                    indicatorColor: darkpurple,
-                    indicatorPadding: const EdgeInsets.all(5),
-                    indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8), color: white),
-                    controller: controller,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    tabs: const [
-                      Tab(
-                        child: Text(
-                          'All',
-                          style: TextStyle(fontSize: 13),
-                        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 151, 145, 153),
+                    borderRadius: BorderRadius.circular(8)),
+                child: TabBar(
+                  dividerHeight: 0,
+                  indicatorColor: darkpurple,
+                  indicatorPadding: const EdgeInsets.all(5),
+                  indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8), color: white),
+                  controller: controller,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: const [
+                    Tab(
+                      child: Text(
+                        'All',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      Tab(
-                        child: Text(
-                          'Done',
-                          style: TextStyle(fontSize: 13),
-                        ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Done',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      Tab(
-                        child: Text(
-                          'Not Done',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        //text: 'Not Done',
+                    ),
+                    Tab(
+                      child: Text(
+                        'Not Done',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      Tab(
-                        child: Text(
-                          'Important',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                      )
-                    ],
-                  ),
+                      //text: 'Not Done',
+                    ),
+                    Tab(
+                      child: Text(
+                        'Important',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    )
+                  ],
                 ),
-
-                // SizedBox(
-                //   height: 20,
-                // )
-                Expanded(
-                  child: TabBarView(
-                    controller: controller,
-                    children: const [
-                      CalenderScreen(),
-                      TaskDone(),
-                      TaskNotDone(),
-                      TaskImportant()
-                    ],
-                  ),
-                )
-              ]),
-            ),
+              ),
+        
+              // SizedBox(
+              //   height: 20,
+              // )
+              Expanded(
+                child: TabBarView(
+                  controller: controller,
+                  children: const [
+                    CalenderScreen(),
+                    TaskDone(),
+                    TaskNotDone(),
+                    TaskImportant()
+                  ],
+                ),
+              )
+            ]),
           ),
         ),
       ),

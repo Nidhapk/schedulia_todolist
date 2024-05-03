@@ -35,63 +35,61 @@ class _TaskTabBarState extends State<EventScreen>
       ),
       body: Container(
         color: white,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Column(children: [
-                // const SizedBox(
-                //   height: 40,
-                //  ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 151, 145, 153),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TabBar(
-                    dividerHeight: 0,
-                    indicatorColor: darkpurple,
-                    indicatorPadding: const EdgeInsets.all(5),
-                    indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8), color: white),
-                    controller: controller,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    tabs: const [
-                      Tab(
-                        child: Text(
-                          'All',
-                          style: TextStyle(fontSize: 13),
-                        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(children: [
+              // const SizedBox(
+              //   height: 40,
+              //  ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 151, 145, 153),
+                    borderRadius: BorderRadius.circular(8)),
+                child: TabBar(
+                  dividerHeight: 0,
+                  indicatorColor: darkpurple,
+                  indicatorPadding: const EdgeInsets.all(5),
+                  indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8), color: white),
+                  controller: controller,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: const [
+                    Tab(
+                      child: Text(
+                        'All',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      Tab(
-                        child: Text(
-                          'Favourites',
-                          style: TextStyle(fontSize: 13),
-                        ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Favourites',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      Tab(
-                        child: Text(
-                          'search',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'search',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    )
+                  ],
                 ),
-                Expanded(
-                  child: TabBarView(
-                    controller: controller,
-                    children: const [
-                      // AddEvents(),
-                      UpcomeingEvents(),
-                      ImportantEvents(),
-                      SearchEvent()
-                    ],
-                  ),
-                )
-              ]),
-            ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: controller,
+                  children: const [
+                    // AddEvents(),
+                    UpcomeingEvents(),
+                    ImportantEvents(),
+                    SearchEvent()
+                  ],
+                ),
+              )
+            ]),
           ),
         ),
       ),

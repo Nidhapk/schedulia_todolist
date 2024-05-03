@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:schedulia/db_functions/category_db.dart';
 import 'package:schedulia/db_functions/db_functions.dart';
@@ -34,54 +35,54 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
 
   @override
   Widget build(BuildContext context) {
+    final width=MediaQuery.of(context).size.width;
+    final height=MediaQuery.of(context).size.height;
     CategoryFunctions().currentUserCategory(userKey!);
     CategoryFunctions().getCategory();
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-        const Color.fromARGB(255, 195, 199, 226),
-        const Color.fromARGB(255, 250, 250, 252),
-        white
-      ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ValueListenableBuilder(
-              valueListenable: userListNotifier,
-              builder:
-                  (BuildContext context, List<UserModel> userList, Widget? _) {
-                return UserContainer(
-                    text: userList.isNotEmpty &&
-                            userList[keys.indexOf(userKey!)].userName != null
-                        ? 'Hello ${userList[keys.indexOf(userKey!)].userName}'
-                        : 'Hello User!',
-                    img: userList[keys.indexOf(userKey!)].userimage ?? '');
-              }),
-          const Padding(
-            padding: EdgeInsets.only(left: 20, top: 25),
-            child: Text(
-              'Categories',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          const Color.fromARGB(255, 195, 199, 226),
+          const Color.fromARGB(255, 250, 250, 252),
+          white
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ValueListenableBuilder(
+                valueListenable: userListNotifier,
+                builder:
+                    (BuildContext context, List<UserModel> userList, Widget? _) {
+                  return UserContainer(color: white.withOpacity(0),items: const [],
+                      text: userList.isNotEmpty &&
+                              userList[int.parse(userKey!)].userName != null
+                          ? 'Hello ${userList[int.parse(userKey!)].userName}'
+                          : 'Hello User!',
+                      img: userList[int.parse(userKey!)].userimage ?? '');
+                }),
+             Padding(
+              padding: EdgeInsets.only(left: width*0.1, top: height*0.04),
+              child:const  Text(
+                'Categories',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+              ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+            Expanded(
                 child: ValueListenableBuilder(
                     valueListenable: currentUserCategoryNotifier,
                     builder: (context, categorylist, _) {
                       CategoryFunctions().currentUserCategory(userKey!);
                       onOptionSelected(categorylist);
-                      return GridView(
-                        shrinkWrap: true,
+                      return GridView(padding: EdgeInsets.all(width<600?width*0.05:width * 0.1,),
+                        shrinkWrap: false,
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20),
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: width<600?2:4,
+                                crossAxisSpacing:width<600? width*0.04:width*0.06,
+                                mainAxisSpacing: width<600? width*0.04:width*0.03,
+                                ),
                         children: [
                           ...widgets,
                           GestureDetector(
@@ -99,9 +100,9 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
                       );
                     }),
               ),
-            ),
-          ),
-        ],
+              SizedBox(height: height*0.1,)
+          ],
+        ),
       ),
     );
   }
@@ -120,7 +121,6 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
             },
             child: CustomCategorycontainer(
               onTap: () {
-                print(element.categoryIcon);
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -163,7 +163,6 @@ class _CategoryScreenNewState extends State<CategoryScreenNew> {
   }
 
   IconData _getIconData(String iconDataString) {
-    //print(iconDataString);
     switch (iconDataString) {
       case 'MaterialIcons-985232':
         return Icons.person_2_rounded;

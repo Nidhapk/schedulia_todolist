@@ -31,6 +31,8 @@ class _CustomCategorycontainerState extends State<CustomCategorycontainer> {
   bool _showFullText2 = false;
   @override
   Widget build(BuildContext context) {
+    final width=MediaQuery.of(context).size.width;
+    final height=MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -51,7 +53,7 @@ class _CustomCategorycontainerState extends State<CustomCategorycontainer> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10),
+         SizedBox(height:width>600? height*0.05:height*0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,7 +63,7 @@ class _CustomCategorycontainerState extends State<CustomCategorycontainer> {
                     ? Icon(
                         widget.icon,
                         color: darkpurple,
-                        size: 30,
+                        size:width>600? height*0.05:height*0.035,
                       )
                     :const  SizedBox(),
               ),
@@ -74,7 +76,7 @@ class _CustomCategorycontainerState extends State<CustomCategorycontainer> {
             ],
           ),
           Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+              padding:  EdgeInsets.only(left: width*0.05, top:width>600 ?height*0.05:height*0.01),
               child: widget.text),
           const SizedBox(
             height: 20,

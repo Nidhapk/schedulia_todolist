@@ -15,14 +15,16 @@ class ProfileTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+      padding:  EdgeInsets.only(top: height*0.05, left:width<600?width*0.1:width*0.3, right: width<600?width*0.1:width*0.3),
       child: TextFormField(
         autovalidateMode: mode,
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: const EdgeInsets.only(left: 30.0),
+          contentPadding:  EdgeInsets.only(left: width*0.05),
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(

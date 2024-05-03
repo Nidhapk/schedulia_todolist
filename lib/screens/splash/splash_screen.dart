@@ -54,9 +54,8 @@ class _SplashScreenState extends State<SplashScreen>
     await UserFunctions().getUser();
     if (checkUser == false) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) =>const  ScreenOne()));
-    }
-  else  if (isLoggedIn == true) {
+          .push(MaterialPageRoute(builder: (context) => const ScreenOne()));
+    } else if (isLoggedIn == true) {
       {
         Navigator.pushReplacementNamed(context, '/homeScreen');
       }
@@ -68,9 +67,9 @@ class _SplashScreenState extends State<SplashScreen>
   Future initializeCurrentUser() async {
     await UserFunctions().getCurrentUserKey();
   }
+
   initializeuser() async {
-    UserModel? user =
-        await UserFunctions().getCurrentUser(userKey!);
+    UserModel? user = await UserFunctions().getCurrentUser(userKey!);
     return user;
   }
 }

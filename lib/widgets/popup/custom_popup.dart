@@ -5,14 +5,15 @@ import 'package:schedulia/widgets/colors.dart';
 class CustomPopUpButton extends StatelessWidget {
   final Color color;
   final List<MenuItem> items;
- const  CustomPopUpButton({
-    super.key,
-    required this.items,required this.color
-  });
+  const CustomPopUpButton(
+      {super.key, required this.items, required this.color});
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return PopupMenuButton<MenuItem>(
+        iconSize: width > 600 ? height * 0.05 : height * 0.035,
         iconColor: color,
         onSelected: (selectedItem) {
           selectedItem.onTap();

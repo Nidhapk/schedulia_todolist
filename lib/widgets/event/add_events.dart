@@ -40,6 +40,7 @@ class _MyWidgetState extends State<AddEvents> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: appBarColor,
       appBar: AppBar(
@@ -69,7 +70,7 @@ class _MyWidgetState extends State<AddEvents> {
                   height: 50,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  padding:  EdgeInsets.only(left:  width<600?width*0.04:width*0.3, right:  width<600?width*0.04:width*0.3),
                   child: Column(
                     children: [
                       const SizedBox(
@@ -187,12 +188,15 @@ class _MyWidgetState extends State<AddEvents> {
                       const SizedBox(
                         height: 20,
                       ),
-                      EventButton(
-                          width: 350,
-                          text: 'Add',
-                          onPressed: () async {
-                            await addButtonOnClicked();
-                          }),
+                      SizedBox(
+                        width: width < 600 ? width * 0.96 : width * 0.8,
+                        child: EventButton(
+                            width: 350,
+                            text: 'Add',
+                            onPressed: () async {
+                              await addButtonOnClicked();
+                            }),
+                      ),
                     ],
                   ),
                 ),

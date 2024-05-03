@@ -49,6 +49,7 @@ class _MyWidgetState extends State<EditEvents> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit events'),
@@ -62,7 +63,9 @@ class _MyWidgetState extends State<EditEvents> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding:  EdgeInsets.only(
+                    left: width < 600 ? width * 0.04 : width * 0.3,
+                    right: width < 600 ? width * 0.04 : width * 0.3),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -169,17 +172,15 @@ class _MyWidgetState extends State<EditEvents> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        EventButton(
-                            width: 340,
-                            text: 'Edit',
-                            onPressed: () async {
-                              await editButtonOnClicked(widget.keyy);
-                              Navigator.of(context).pop();
-                            }),
-                      ],
+                        SizedBox(width: width < 600 ? width * 0.96 : width * 0.5,
+                          child: EventButton(
+                              width: 340,
+                              text: 'Edit',
+                              onPressed: () async {
+                                await editButtonOnClicked(widget.keyy);
+                                Navigator.of(context).pop();
+                              }),
+        
                     ),
                   ],
                 ),

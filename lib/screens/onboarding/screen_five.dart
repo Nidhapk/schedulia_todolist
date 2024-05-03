@@ -7,6 +7,7 @@ class ScreenFive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -16,27 +17,31 @@ class ScreenFive extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
               ),
-              const Text(
+              Text(
                 'Plan your days',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
+                style: TextStyle(
+                    fontWeight: FontWeight.w700, fontSize:height*0.032),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-              const Text(
+              Text(
                 'Never forget an upcoming event again! \nUse our calendar feature to mark important\n dates and stay prepared.',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: height*0.019),
                 textAlign: TextAlign.center,
               ),
               Stack(
                 children: [
-                  SvgPicture.asset('lib/assets/Events-bro.svg'),
-                  SvgPicture.asset('lib/assets/Events-pana.svg')
+                  SvgPicture.asset(
+                    'lib/assets/Events-pana.svg',
+                    width: 200,
+                    height: MediaQuery.of(context).size.height * 0.49,
+                  )
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: MediaQuery.of(context).size.height * 0.13,
               ),
               Padding(
                 padding: EdgeInsets.only(
