@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:schedulia/class/custom_textstyle.dart';
@@ -385,7 +385,7 @@ class _EditTaskState extends State<EditTask> {
                             hintText: 'Enter discription here',
                             customController: taskNoteController,
                             maxLines: 5,
-                          ),//!kIsWeb?
+                          ),!kIsWeb?
                           ValueListenableBuilder(
                             valueListenable: reminderNotifier,
                             builder: (context, value, child) {
@@ -444,7 +444,7 @@ class _EditTaskState extends State<EditTask> {
                                     )),
                               );
                             },
-                          )//:const SizedBox()
+                          ):const SizedBox()
                           ,
                           Padding(
                               padding:
