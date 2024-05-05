@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, use_build_context_synchronousl, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+//import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:intl/intl.dart';
 import 'package:schedulia/class/custom_textstyle.dart';
 import 'package:schedulia/db_functions/category_db.dart';
@@ -387,7 +387,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                             hintText: 'Enter discription here',
                             customController: taskNoteController,
                             maxLines: 5,
-                          ),!kIsWeb?
+                          ),//!kIsWeb?
                           ValueListenableBuilder(
                             valueListenable: reminderNotifier,
                             builder: (context, value, child) {
@@ -451,7 +451,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                                 
                             );
                             },
-                          ):const SizedBox()
+                          )//:const SizedBox()
                           ,
                           Padding(
                               padding:

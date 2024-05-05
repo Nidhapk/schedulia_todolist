@@ -30,7 +30,7 @@ def keystoreProperties = new Properties()
 android {
     namespace "com.example.schedulia"
     compileSdkVersion 34
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
     
 
     compileOptions {
